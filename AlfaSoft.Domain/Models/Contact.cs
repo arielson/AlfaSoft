@@ -8,7 +8,7 @@ namespace AlfaSoft.Domain.Models
         [StringLength(int.MaxValue, MinimumLength = 5, ErrorMessage = "Please enter a value bigger than {1} characters")]
         public string Name { get; set; }
         [Required(ErrorMessage = "{0} required")]
-        [StringLength(9, ErrorMessage = "Please enter a value equal to {1} characters")]
+        [StringLength(9, MinimumLength = 9, ErrorMessage = "Please enter a value equal to {1} characters")]
         [MaxLength(9)]
         [Display(Name = "Contact")]
         public string ContactValue { get; set; }

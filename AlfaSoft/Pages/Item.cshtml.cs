@@ -29,7 +29,7 @@ namespace AlfaSoft.Web.Pages
             return Page();
         }
 
-        public IActionResult OnPostAsync()
+        public IActionResult OnPost()
         {
             Contact.UserActionId = SessionHelper.User.Id;
             if (Contact != null)
