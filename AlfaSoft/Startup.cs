@@ -1,6 +1,7 @@
 using AlfaSoft.Application.Applications;
 using AlfaSoft.Application.Interfaces;
 using AlfaSoft.Domain;
+using AlfaSoft.Domain.Enumerators;
 using AlfaSoft.Repository;
 using AlfaSoft.Repository.Interfaces;
 using AlfaSoft.Repository.Repositories;
@@ -29,7 +30,28 @@ namespace AlfaSoft
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            Settings.ConnectionString = Configuration["Connection:SqlServerConnectionString"];
+            string connectionType = Configuration["Connection:Type"];
+            switch (connectionType)
+            {
+                case "SqlServer":
+                    Settings.ConnectionString = Configuration["Connection:SqlServerConnectionString"];
+                    Settings.Type = ConnectionType.SqlServer;
+                    break;
+                case "MySql":
+                    Settings.ConnectionString = Configuration["Connection:MySqlConnectionString"];
+                    Settings.Type = ConnectionType.MySql;
+                    break;
+                case "PostgreSql":
+                    System.AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+                    Settings.ConnectionString = Configuration["Connection:PostgreSqlConnectionString"];
+                    Settings.Type = ConnectionType.PostgreSql;
+                    break;
+                default:
+                    Settings.ConnectionString = Configuration["Connection:MySqlConnectionString"];
+                    Settings.Type = ConnectionType.MySql;
+                    break;
+            }
+
             services.AddDbContext<SqlContext>();
 
             services.AddTransient<IUserRepository, UserRepository>();

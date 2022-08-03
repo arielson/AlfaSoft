@@ -1,4 +1,5 @@
 ﻿using AlfaSoft.Domain;
+using AlfaSoft.Domain.Enumerators;
 using AlfaSoft.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,7 +16,21 @@ namespace AlfaSoft.Repository
         {
             if (!options.IsConfigured)
             {
-                options.UseSqlServer(Settings.ConnectionString);
+                switch (Settings.Type)
+                {
+                    case ConnectionType.MySql:
+                        options.UseMySql(Settings.ConnectionString, ServerVersion.AutoDetect(Settings.ConnectionString));
+                        break;
+                    case ConnectionType.SqlServer:
+                        options.UseSqlServer(Settings.ConnectionString);
+                        break;
+                    case ConnectionType.PostgreSql:
+                        options.UseNpgsql(Settings.ConnectionString);
+                        break;
+                    default:
+                        options.UseSqlServer(Settings.ConnectionString);
+                        break;
+                }
             }
         }
 

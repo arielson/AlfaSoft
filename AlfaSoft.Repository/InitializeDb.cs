@@ -10,12 +10,11 @@ namespace AlfaSoft.Repository
         public static void Initialize(SqlContext context)
         {
             context.Database.EnsureCreated();
-
+            context.Database.BeginTransaction();
             try
             {
                 if (!context.User.IgnoreQueryFilters().Any())
                 {
-                    context.Database.BeginTransaction();
                     User user = new()
                     {
                         Login = "alfasoft",
