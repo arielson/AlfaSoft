@@ -1,0 +1,24 @@
+﻿@page
+@model AlfaSoft.Web.Pages.LoginModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="box login-box">
+    <div>
+        <form method="post">
+            <div class="form-group col-xs-12 col-sm-8 col-md-6 col-lg-3">
+                <label asp-for="User.Login"></label>
+                <input asp-for="User.Login" class="form-control" />
+                <span asp-validation-for="User.Login" class="text-danger"></span>
+            </div>
+            <div class="form-group col-xs-12 col-sm-8 col-md-6 col-lg-3">
+                <label asp-for="User.Password"></label>
+                <input asp-for="User.Password" class="form-control" />
+                <span asp-validation-for="User.Password" class="text-danger"></span>
+            </div>
+            <input type="submit" />
+            <button type="button" onclick='location.href="./Index"' class="btn btn-primary" style="margin: 5px;">Contacts</button>
+        </form>
+    </div>
+</div>

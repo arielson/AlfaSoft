@@ -9,6 +9,8 @@ namespace AlfaSoft.Application.Interfaces
 
         User GetById(long id);
 
+        User GetByLoginAndPassword(string login, string password);
+
         IEnumerable<User> GetAll();
 
         void Update(User obj);

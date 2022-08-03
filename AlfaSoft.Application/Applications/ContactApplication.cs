@@ -8,15 +8,19 @@ namespace AlfaSoft.Application.Applications
     public class ContactApplication : IContactApplication
     {
         private readonly IContactService _service;
+        private readonly IUserService _userService;
 
-        public ContactApplication(IContactService service)
+        public ContactApplication(IContactService service,
+            IUserService userService)
         {
             _service = service;
+            _userService = userService;
         }
 
         public void Add(Contact obj)
         {
-            _service.Add(obj);
+            if (ValidadeUser(obj.UserActionId))
+                _service.Add(obj);
         }
 
         public void Dispose()
@@ -36,12 +40,26 @@ namespace AlfaSoft.Application.Applications
 
         public void Remove(Contact obj)
         {
-            _service.Remove(obj);
+            if (ValidadeUser(obj.UserActionId))
+                _service.Remove(obj);
         }
 
         public void Update(Contact obj)
         {
-            _service.Update(obj);
+            if (ValidadeUser(obj.UserActionId))
+                _service.Update(obj);
+        }
+
+        private bool ValidadeUser(long? id)
+        {
+            if (!id.HasValue)
+                throw new System.Exception("User is not valid");
+
+            var user = _userService.GetById(id.Value);
+            if (user == null)
+                throw new System.Exception("Operation not permitted");
+
+            return true;
         }
     }
 }

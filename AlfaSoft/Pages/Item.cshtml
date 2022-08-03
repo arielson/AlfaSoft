@@ -1,0 +1,30 @@
+﻿@page
+@model AlfaSoft.Web.Pages.ItemModel
+@{
+    ViewData["Title"] = "Contact";
+}
+
+<div class="box login-box">
+    <div>
+        <form method="post">
+            <input type="hidden" asp-for="Contact.Id" />
+            <div class="form-group col-xs-12 col-sm-8 col-md-6 col-lg-3">
+                <label asp-for="Contact.Name"></label>
+                <input asp-for="Contact.Name" class="form-control" />
+                <span asp-validation-for="Contact.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group col-xs-12 col-sm-8 col-md-6 col-lg-3">
+                <label asp-for="Contact.ContactValue"></label>
+                <input asp-for="Contact.ContactValue" class="form-control" />
+                <span asp-validation-for="Contact.ContactValue" class="text-danger"></span>
+            </div>
+            <div class="form-group col-xs-12 col-sm-8 col-md-6 col-lg-3">
+                <label asp-for="Contact.Email"></label>
+                <input asp-for="Contact.Email" class="form-control" />
+                <span asp-validation-for="Contact.Email" class="text-danger"></span>
+            </div>
+            <input type="submit" />
+            <button type="button" onclick='location.href="./Index"' class="btn btn-primary" style="margin: 5px;">Back</button>
+        </form>
+    </div>
+</div>

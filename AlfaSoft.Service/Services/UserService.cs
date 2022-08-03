@@ -13,5 +13,10 @@ namespace AlfaSoft.Service.Services
         {
             _repository = repository;
         }
+
+        public User GetByLoginAndPassword(string login, string password)
+        {
+            return _repository.GetByLoginAndPassword(login, password);
+        }
     }
 }

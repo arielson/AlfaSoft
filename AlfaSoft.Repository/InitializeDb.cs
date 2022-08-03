@@ -15,6 +15,7 @@ namespace AlfaSoft.Repository
             {
                 if (!context.User.IgnoreQueryFilters().Any())
                 {
+                    context.Database.BeginTransaction();
                     User user = new()
                     {
                         Login = "alfasoft",
@@ -23,6 +24,8 @@ namespace AlfaSoft.Repository
                     };
 
                     context.User.Add(user);
+                    context.SaveChanges();
+                    context.Database.CommitTransaction();
                 }
             }
             catch (Exception)

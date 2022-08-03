@@ -34,6 +34,11 @@ namespace AlfaSoft.Application.Applications
             return _service.GetById(id);
         }
 
+        public User GetByLoginAndPassword(string login, string password)
+        {
+            return _service.GetByLoginAndPassword(login, password);
+        }
+
         public void Remove(User obj)
         {
             _service.Remove(obj);

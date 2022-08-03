@@ -8,5 +8,7 @@ namespace AlfaSoft.Domain.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
+        [NotMapped]
+        public long? UserActionId { get; set; }
     }
 }

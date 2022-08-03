@@ -1,5 +1,6 @@
 ﻿using AlfaSoft.Domain.Models;
 using AlfaSoft.Repository.Interfaces;
+using System.Linq;
 
 namespace AlfaSoft.Repository.Repositories
 {
@@ -9,6 +10,11 @@ namespace AlfaSoft.Repository.Repositories
         public UserRepository(SqlContext context) : base(context)
         {
             _context = context;
+        }
+
+        public User GetByLoginAndPassword(string login, string password)
+        {
+            return _context.Set<User>().SingleOrDefault(x => x.Login.ToUpper() == login.ToUpper() && x.Password == password);
         }
     }
 }
