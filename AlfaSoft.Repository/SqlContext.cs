@@ -28,7 +28,7 @@ namespace AlfaSoft.Repository
                         options.UseNpgsql(Settings.ConnectionString);
                         break;
                     default:
-                        options.UseSqlServer(Settings.ConnectionString);
+                        options.UseNpgsql(Settings.ConnectionString);
                         break;
                 }
             }
