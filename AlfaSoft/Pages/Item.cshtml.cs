@@ -31,6 +31,11 @@ namespace AlfaSoft.Web.Pages
 
         public IActionResult OnPost()
         {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
             Contact.UserActionId = SessionHelper.User.Id;
             if (Contact != null)
             {

@@ -7,7 +7,10 @@
 <div class="box login-box">
     <div>
         <form method="post">
-            <input type="hidden" asp-for="Contact.Id" />
+            @if(Model.Contact != null && Model.Contact.Id > 0)
+            {
+                <input type="hidden" asp-for="Contact.Id" />    
+            }
             <div class="form-group col-xs-12 col-sm-8 col-md-6 col-lg-3">
                 <label asp-for="Contact.Name"></label>
                 <input asp-for="Contact.Name" class="form-control" />
